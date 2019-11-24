@@ -1,4 +1,8 @@
 import Search from './models/Search';
+import * as searchView from './view/searchView';
+import {
+  elements
+} from './view/base';
 /**GLOBAL STATE OF THE APP
  * - Search object
  * - Current recipe object
@@ -11,7 +15,9 @@ import Search from './models/Search';
 const state = {};
 const controlSearch = async () => {
   // * 1) Get query from view
-  const query = 'pizza'; //TODO
+  const query = searchView.getInput(); //TODO
+  console.log(query);
+
 
   if (query) {
     // * 2) New search object and add to state
@@ -28,7 +34,7 @@ const controlSearch = async () => {
 
 }
 
-document.querySelector('.search').addEventListener('submit', e => {
+elements.searchForm.addEventListener('submit', e => {
   e.preventDefault();
   controlSearch();
 })
