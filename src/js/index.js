@@ -16,9 +16,7 @@ const state = {};
 const controlSearch = async () => {
   // * 1) Get query from view
   const query = searchView.getInput(); //TODO
-  console.log(query);
-
-
+  // console.log(query);
   if (query) {
     // * 2) New search object and add to state
     state.search = new Search(query);
@@ -28,10 +26,9 @@ const controlSearch = async () => {
     await state.search.getResults(); //This here returns a promise
 
     //* 5) Render results on UI
-    console.log(state.search.result);
+    // console.log(state.search.result);
+    searchView.renderResults(state.search.result);
   }
-
-
 }
 
 elements.searchForm.addEventListener('submit', e => {
