@@ -1,13 +1,9 @@
-import string from './models/Search';
+import axios from 'axios';
+async function getResults(query) {
+  const res = await axios(`https://forkify-api.herokuapp.com/api/search?&q=${query}`);
+  const recipes = res.data.recipes;
+  // console.log(res);
+  console.log(recipes);
 
-// * This way you can import multiple things from one module
-// import {
-//   add as a,
-//   multiply as b,
-//   ID
-// } from './view/searchView';
-// console.log(`Using imported functions! ${a(ID,2)} and ${b(3,5)}. ${string}`);
-
-// * This way you can import everything
-import * as searchView from './view/searchView';
-console.log(`Using imported functions! ${searchView.add(searchView.ID,2)} and ${searchView.multiply(3,5)}. ${string}`);
+}
+getResults('pizza');
