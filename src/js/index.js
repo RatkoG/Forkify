@@ -1,8 +1,8 @@
 import string from './models/Search';
 import {
-  add,
-  multiply,
+  add as a,
+  multiply as b,
   ID
 } from './view/searchView';
 
-console.log(`Using imported functions! ${add(ID,2)} and ${multiply(3,5)}. ${string}`);
+console.log(`Using imported functions! ${a(ID,2)} and ${b(3,5)}. ${string}`);
