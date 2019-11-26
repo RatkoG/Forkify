@@ -1,4 +1,6 @@
-import { elements } from "./base";
+import {
+  elements
+} from "./base";
 
 // This is implicit return. we dont need to write return e
 export const getInput = () => elements.searchInput.value;
@@ -15,7 +17,7 @@ const limitRecipeTitle = (title, limit = 17) => {
       if (acc + curr.length <= limit) {
         newTitle.push(curr);
       }
-      return acc + curr.length;
+      return (acc + curr.length);
     }, 0);
     //  return the result
     return `${newTitle.join(" ")}...`;
@@ -37,6 +39,8 @@ const renderRecipe = recipe => {
 </li>`;
   elements.searchResList.insertAdjacentHTML("beforeend", markup);
 };
-export const renderResults = recipes => {
-  recipes.forEach(renderRecipe);
+export const renderResults = (recipes, page = 2, resPerPage = 8) => {
+  const start = (page - 1) * resPerPage;
+  const end = page * resPerPage;
+  recipes.slice(start, end).forEach(renderRecipe);
 };
