@@ -31,13 +31,18 @@ const controlSearch = async () => {
     // clear the Results
     searchView.clearResults();
     renderLoader(elements.searchRes);
-    // * 4)Search for recipes
-    await state.search.getResults(); //This here returns a promise
+    try {
+      // * 4)Search for recipes
+      await state.search.getResults(); //This here returns a promise
 
-    //* 5) Render results on UI
-    // console.log(state.search.result);
-    clearLoader();
-    searchView.renderResults(state.search.result);
+      //* 5) Render results on UI
+      // console.log(state.search.result);
+      clearLoader();
+      searchView.renderResults(state.search.result);
+
+    } catch (error) {
+      clearLoader();
+    };
   }
 }
 
@@ -60,6 +65,35 @@ elements.searchResPages.addEventListener('click', e => {
 
 
 //******* */ RECIPE CONTROLLER
-const r = new Recipe('6fab1c');
-r.getRecipe();
-console.log(r);
+// This was a test
+// const r = new Recipe('6fab1c');
+// r.getRecipe();
+// console.log(r);
+const controlRecipe = async () => {
+  // Get ID from URL
+  const id = window.location.hash.replace('#', '');
+  console.log(id);
+  if (id) {
+    // Prepare UI for changes
+
+    // Create new recipe object
+    state.recipe = new Recipe(id);
+    try {
+      // Get recipe data
+      await state.recipe.getRecipe();
+      // Call servings and time calculate
+      state.recipe.calcTime();
+      state.recipe.calcServings();
+      //Rencer recipe
+      console.log(state.recipe);
+
+    } catch (error) {
+      alert('Error processing recipe!');
+    }
+  }
+}
+
+// * Adding same event listener for different events
+// window.addEventListener('hashchange', controlRecipe);
+// window.addEventListener('load', controlRecipe);
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
