@@ -22,7 +22,7 @@ import {
 
 
 const state = {};
-window.state = state;
+// window.state = state;
 //******* */ SEARCH CONTROLLER
 const controlSearch = async () => {
   // * 1) Get query from view
@@ -227,4 +227,4 @@ elements.recipe.addEventListener('click', e => {
   // console.log(state.recipe);
 })
 
-window.l = new List();
+// window.l = new List();
