@@ -110,12 +110,17 @@ const controlRecipe = async () => {
       // Call servings and time calculate
       state.recipe.calcTime();
       state.recipe.calcServings();
-      //Rencer recipe
+      //render recipe
       // console.log(state.recipe);
       clearLoader();
-      recipeView.renderRecipe(state.recipe);
+      recipeView.renderRecipe(
+        state.recipe,
+        state.likes.isLiked(id)
+      );
 
     } catch (error) {
+      console.log(error);
+
       alert('Error processing recipe!');
     }
   }
@@ -155,6 +160,10 @@ elements.shopping.addEventListener('click', e => {
 })
 
 // ***LIKE CONTROLLER
+
+// !TESTING
+state.likes = new Likes();
+
 const controlLike = () => {
   if (!state.likes) state.likes = new Likes();
   const currentID = state.recipe.id
